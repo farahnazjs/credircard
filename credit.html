@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: 0;
+        }
+        .container{
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            background-image: url(img36/1.jpg);
+            background-size: cover;
+            background-position: bottom;
+        }
+        .div1{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+        .card{
+            width: 500px;
+            height: 300px;
+            border-top: 3px solid silver;
+            border-left: 3px solid silver;
+            border-radius: 10px;
+            background: rgba(200,200,200,0.1);
+            box-shadow: 4px 4px 4px rgba(68,68,68,0.6);
+            cursor: pointer;
+        }
+        .visa{
+            width: 20%;
+            height: 80px;
+            filter: brightness(0.9);
+            background: url(img36/favpng_credit-card-visa-logo-mastercard.png);
+            background-size: cover;
+            position: relative;
+            top: 10px;
+            left: 380px;
+        }
+        .chip{
+            width: 50px;
+            height: 50px;
+            margin: 10px;
+            background-image: url(img36/favpng_integrated-circuit-smart-card.png);
+            background-size: cover;
+            position: relative;
+            top: 20px; left: 40px;
+            
+        }
+        .meta{
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+        .meta>input{
+            background-color: rgba(255, 255, 255, 0);
+            color: white;
+            font-size: 17px;
+            padding: 15px;
+            letter-spacing: 3px;
+        }
+        .meta>input::placeholder{
+            font-size: 20px;
+            color: rgb(191, 191, 191);
+        }
+       .container>input{
+        width: 300px;
+        height: 50px;
+        background-color: rgba(87, 82, 82, 0.437);
+        color: white;
+        font-size: 20px;
+        border-radius: 10px;
+        text-align: center;
+       }
+       .card-number{
+        padding-left: 20px;
+        padding-top: 20px;
+        color: rgb(243, 243, 243);
+        letter-spacing: 5px;
+       }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="div1">
+            <div id="hover" class="card">
+                <div class="visa"></div>
+                <div class="chip"></div>
+                <h1 class="card-number"></h1>
+                <div class="meta">
+                    <input type="text" placeholder="farahnaz jodeiri">
+                    <input id="date" type="date">
+                </div>
+        </div>
+        </div>
+        <input onkeyup="farah1(this , event)" type="text" placeholder="Enter your number card">
+    
+    </div>
+   
+</body>
+<script>
+    
+
+
+
+
+    let _far
+    let _old
+    function farah1(self ,event){
+
+    let temp =self.value
+    _far = event.keyCode
+
+
+    if (_far != 8){
+        x = temp.substr((temp.length) - 1, 1)
+
+        _old = document.querySelector('.card-number').innerHTML
+
+        if(temp.length == 4 || temp.length == 8 || temp.length == 12){
+            _old = _old + x + '-'
+            } else {
+                _old = _old + x
+            }
+        document.querySelector('.card-number').innerHTML = _old
+
+        if (temp.length == 16) {
+             document.querySelector('#date').focus()
+            }
+        }else{
+            _del= document.querySelector('.card-number').innerHTML
+
+            if(_del.length == 6 || _del.length == 11 || _del.length == 16){
+                _del = _del.substring(0, (_del.length)-2)
+                document.querySelector('.card-number').innerHTML= _del
+            }else{
+                _del=_del.substring(0, (_del.length)-1)
+                document.querySelector('.card-number').innerHTML= _del
+            }
+            
+    }
+   
+
+    }
+
+        document.getElementById('hover').addEventListener('mousemove', function(event){
+            let offl= document.getElementById('hover').offsetLeft
+            let offt = document.getElementById('hover').offsetTop
+            x = (event.clientX - offl) -200
+            y = (event.clientY - offt) - 100
+         
+            document.getElementById('hover').style.transform = 'perspective(800px)rotateY('+(x/10)+'deg)rotateX('+(y/10)+'deg)'
+
+    })   
+    
+</script>
+</html>
